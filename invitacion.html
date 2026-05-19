@@ -8,93 +8,69 @@
 <style>
 body {
     margin: 0;
-    font-family: 'Georgia', serif;
-    text-align: center;
+    background: black;
 }
 
+/* contenedor */
 .container {
     position: relative;
-    width: 100%;
     max-width: 500px;
     margin: auto;
 }
 
-.bg {
+/* imagen fondo */
+img {
     width: 100%;
+    display: block;
 }
 
-.content {
+/* BOTONES SOBRE LA IMAGEN */
+.boton {
     position: absolute;
-    top: 5%;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    color: #4A3A32;
-}
-
-h1 {
-    color: #8C6A2F;
-}
-
-.btn {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
+    left: 50%;
+    transform: translateX(-50%);
     background: #8C6A2F;
     color: white;
+    padding: 10px 20px;
     border-radius: 25px;
     text-decoration: none;
+    font-size: 14px;
 }
+
+/* posiciones (AJUSTA SI QUIERES) */
+.boton1 { top: 55%; }   /* ceremonia */
+.boton2 { top: 65%; }   /* recepción */
+.boton3 { top: 85%; }   /* confirmar */
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-    <!-- Fondo -->
-    <img src="fondo2.jpg" class="bg">
+    <!-- Imagen completa -->
+    <img src="invitacion.png">
 
-    <!-- Contenido -->
-    <div class="content">
+    <!-- BOTÓN CEREMONIA -->
+    <a href="https://www.bing.com/maps/search?mepi=72%7ELocal%7EEmbedded%7ELocal_Magazine_List_Card_See_More&ty=17&poicount=18&usebfpr=true&v=2&sV=1&FORM=MPSRPL&style=r&q=iglesia+en+Valencia&secq=Parroquia+Nuestra+Se%C3%B1ora+del+Carmen+iglesia&sece=ypid%3AYN52109EE4BB565B2E&cp=39.483482%7E-0.370641&lvl=16"
+       target="_blank" class="boton boton1">
+        📍 Ver ubicación
+    </a>
 
-        <p>Con la bendición de Dios y el amor que nos une...</p>
+    <!-- BOTÓN RECEPCIÓN -->
+    <a href="#" class="boton boton2">
+        📍 Ver ubicación
+    </a>
 
-        <h1>Javier & Laura</h1>
-
-        <p>Sábado, 12 de Julio 2026 - 5:00 PM</p>
-
-        <h3>📍 Ceremonia</h3>
-        <p>Parroquia Nuestra Señora del Carmen<br>
-        Valencia</p>
-
-        <a href="https://www.bing.com/maps/search?..." target="_blank" class="btn">
-        Ver ubicación
-        </a>
-
-        <h3>🎉 Recepción</h3>
-        <p>Sala de eventos Olybet</p>
-
-        <a href="#" class="btn">Ver ubicación</a>
-
-        <p style="margin-top:20px;">
-        Tu presencia será el mejor regalo 💖
-        </p>
-
-        <h3>🎁 Regalo</h3>
-        <p>Lluvia de sobres</p>
-
-        <a href="https://wa.me/XXXXXXXXXX?text=Hola%20Javier%20y%20Laura,%20confirmo%20mi%20asistencia" class="btn">
-        Confirmar asistencia
-        </a>
-
-        <p style="margin-top:20px;">¡Te esperamos!</p>
-
-    </div>
+    <!-- BOTÓN CONFIRMAR -->
+    <a href="javascript:confirmar()" class="boton boton3">
+        💌 Confirmar asistencia
+    </a>
 
 </div>
 
-<!-- Música -->
+<!-- MÚSICA -->
 <audio id="musica" autoplay loop>
     <source src="boda.mp3" type="audio/mpeg">
 </audio>
@@ -104,6 +80,17 @@ window.addEventListener('load', function() {
     const musica = document.getElementById("musica");
     musica.play().catch(() => {});
 });
+
+/* POPUP CONFIRMACIÓN */
+function confirmar() {
+    const respuesta = confirm("¿Podrás acompañarnos en este día tan especial?");
+
+    if (respuesta) {
+        window.open("https://wa.me/XXXXXXXXXX?text=Hola%20Javier%20y%20Laura,%20asistiré%20a%20su%20boda%20💖", "_blank");
+    } else {
+        window.open("https://wa.me/XXXXXXXXXX?text=Hola%20Javier%20y%20Laura,%20lamentablemente%20no%20podré%20asistir%20😔", "_blank");
+    }
+}
 </script>
 
 </body>
