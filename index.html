@@ -8,22 +8,27 @@
 <style>
 body {
     margin: 0;
+    padding: 0;
     background: black;
 }
 
+/* Imagen completa */
 img {
     width: 100%;
+    height: auto;
     display: block;
+    cursor: pointer;
 }
 </style>
+
 </head>
 
 <body>
 
-<!-- Imagen completa clicable -->
+<!-- Imagen del sobre (pantalla completa clicable) -->
 <img src="sobre.png" onclick="abrirInvitacion()">
 
-<!-- Sonido -->
+<!-- Sonido tipo varita mágica -->
 <audio id="sonido">
     <source src="magic.mp3" type="audio/mpeg">
 </audio>
@@ -31,9 +36,13 @@ img {
 <script>
 function abrirInvitacion() {
     const sonido = document.getElementById("sonido");
+
+    // reproducir sonido
+    sonido.currentTime = 0;
     sonido.play();
 
-    setTimeout(() => {
+    // esperar y redirigir
+    setTimeout(function() {
         window.location.href = "invitacion.html";
     }, 1200);
 }
