@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
+
+.bg {
+    width: 100%;
+}
+
+.content {
+    position: absolute;
+    top: 5%;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #4A3A32;
+}
+
+h1 {
+    color: #8C6A2F;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #8C6A2F;
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Fondo -->
+    <img src="fondo2.jpg" class="bg">
+
+    <!-- Contenido -->
+    <div class="content">
+
+        <p>Con la bendición de Dios y el amor que nos une...</p>
+
+        <h1>Javier & Laura</h1>
+
+        <p>Sábado, 12 de Julio 2026 - 5:00 PM</p>
+
+        <h3>📍 Ceremonia</h3>
+        <p>Parroquia Nuestra Señora del Carmen<br>
+        Valencia</p>
+
+        <a href="https://www.bing.com/maps/search?..." target="_blank" class="btn">
+        Ver ubicación
+        </a>
+
+        <h3>🎉 Recepción</h3>
+        <p>Sala de eventos Olybet</p>
+
+        <a href="#" class="btn">Ver ubicación</a>
+
+        <p style="margin-top:20px;">
+        Tu presencia será el mejor regalo 💖
+        </p>
+
+        <h3>🎁 Regalo</h3>
+        <p>Lluvia de sobres</p>
+
+        <a href="https://wa.me/XXXXXXXXXX?text=Hola%20Javier%20y%20Laura,%20confirmo%20mi%20asistencia" class="btn">
+        Confirmar asistencia
+        </a>
+
+        <p style="margin-top:20px;">¡Te esperamos!</p>
+
+    </div>
+
+</div>
+
+<!-- Música -->
+<audio id="musica" autoplay loop>
+    <source src="boda.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+window.addEventListener('load', function() {
+    const musica = document.getElementById("musica");
+    musica.play().catch(() => {});
+});
+</script>
+
+</body>
+</html>
