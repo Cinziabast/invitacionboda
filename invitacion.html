@@ -196,5 +196,22 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+    <script>
+const audio = document.getElementById("musica");
+
+// intenta iniciar al cargar
+window.addEventListener("load", () => {
+    audio.currentTime = 50;
+    audio.play().catch(() => {});
+});
+
+// FORZAR en el primer clic (clave en móviles)
+document.addEventListener("click", () => {
+    audio.currentTime = 50;
+    audio.play().catch(() => {});
+}, { once: true });
+</script>
+
+
 </body>
 </html>
