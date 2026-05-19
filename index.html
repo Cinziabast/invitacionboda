@@ -8,43 +8,87 @@
 <style>
 body {
     margin: 0;
-    padding: 0;
-    background: black;
+    background: #f8f4ee;
 }
 
-/* Imagen completa */
-img {
+.container {
+    position: relative;
     width: 100%;
-    height: auto;
+    max-width: 500px;
+    margin: auto;
+}
+
+.container img {
+    width: 100%;
     display: block;
     cursor: pointer;
 }
-</style>
 
+/* ESTRELLITAS */
+.estrella {
+    position: fixed;
+    color: #d4af37;
+    font-size: 20px;
+    text-shadow: 0 0 8px #fff2b8;
+    animation: explosion 1s ease-out forwards;
+    z-index: 999;
+    pointer-events: none;
+}
+
+@keyframes explosion {
+    0% {
+        opacity: 1;
+        transform: scale(0.3);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--x), var(--y)) scale(2.2);
+    }
+}
+</style>
 </head>
 
 <body>
 
-<!-- Imagen del sobre (pantalla completa clicable) -->
-<img src="sobre.png" onclick="abrirInvitacion()">
+<div class="container">
+    <img src="sobre.png" onclick="abrirInvitacion()">
+</div>
 
-<!-- Sonido tipo varita mágica -->
 <audio id="sonido">
     <source src="magic.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+function crearEstrellas() {
+    for (let i = 0; i < 26; i++) {
+        const estrella = document.createElement("div");
+        estrella.className = "estrella";
+        estrella.innerHTML = "✦";
+
+        const x = (Math.random() * 300 - 150) + "px";
+        const y = (Math.random() * 300 - 150) + "px";
+
+        estrella.style.left = "50%";
+        estrella.style.top = "55%";
+        estrella.style.setProperty("--x", x);
+        estrella.style.setProperty("--y", y);
+
+        document.body.appendChild(estrella);
+
+        setTimeout(() => estrella.remove(), 1000);
+    }
+}
+
 function abrirInvitacion() {
     const sonido = document.getElementById("sonido");
-
-    // reproducir sonido
     sonido.currentTime = 0;
-    sonido.play();
+    sonido.play().catch(() => {});
 
-    // esperar y redirigir
-    setTimeout(function() {
+    crearEstrellas();
+
+    setTimeout(() => {
         window.location.href = "invitacion.html";
-    }, 1200);
+    }, 1100);
 }
 </script>
 
