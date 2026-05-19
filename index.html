@@ -9,12 +9,14 @@
 body {
     margin: 0;
     background: #f8f4ee;
+    overflow: hidden;
 }
 
 .container {
     position: relative;
     width: 100%;
     max-width: 500px;
+    height: 100vh;
     margin: auto;
 }
 
@@ -23,6 +25,60 @@ body {
     height: 100vh;
     object-fit: cover;
     display: block;
+    cursor: pointer;
+}
+
+/* ZOOM DEL SOBRE */
+.sobre {
+    transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.sobre.zoom {
+    transform: scale(1.08);
+    opacity: 0.95;
+}
+
+/* CARTA QUE SALE */
+.carta {
+    position: fixed;
+    left: 50%;
+    top: 58%;
+    transform: translate(-50%, 0);
+    width: 210px;
+    height: 270px;
+    background: linear-gradient(180deg, #fffaf3, #f7ead2);
+    border: 2px solid #d4af37;
+    border-radius: 12px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+    opacity: 0;
+    z-index: 998;
+}
+
+.carta::before {
+    content: "Estás invitado";
+    position: absolute;
+    top: 38%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: Georgia, serif;
+    color: #8C6A2F;
+    font-size: 18px;
+}
+
+.carta.abrir {
+    animation: subirCarta 0.9s ease forwards;
+}
+
+@keyframes subirCarta {
+    0% {
+        transform: translate(-50%, 60px) scale(0.85);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -130px) scale(1);
+        opacity: 1;
+    }
 }
 
 /* ESTRELLITAS */
@@ -52,8 +108,10 @@ body {
 <body>
 
 <div class="container">
-    <img src="sobre.png" onclick="abrirInvitacion()">
+    <img src="sobre.png" class="sobre" id="sobre" onclick="abrirInvitacion()">
 </div>
+
+<div class="carta" id="carta"></div>
 
 <audio id="sonido">
     <source src="magic.mp3" type="audio/mpeg">
@@ -61,13 +119,13 @@ body {
 
 <script>
 function crearEstrellas() {
-    for (let i = 0; i < 26; i++) {
+    for (let i = 0; i < 28; i++) {
         const estrella = document.createElement("div");
         estrella.className = "estrella";
         estrella.innerHTML = "✦";
 
-        const x = (Math.random() * 300 - 150) + "px";
-        const y = (Math.random() * 300 - 150) + "px";
+        const x = (Math.random() * 320 - 160) + "px";
+        const y = (Math.random() * 320 - 160) + "px";
 
         estrella.style.left = "50%";
         estrella.style.top = "55%";
@@ -81,15 +139,23 @@ function crearEstrellas() {
 }
 
 function abrirInvitacion() {
+    const sobre = document.getElementById("sobre");
+    const carta = document.getElementById("carta");
     const sonido = document.getElementById("sonido");
+
     sonido.currentTime = 0;
     sonido.play().catch(() => {});
 
+    sobre.classList.add("zoom");
     crearEstrellas();
 
     setTimeout(() => {
+        carta.classList.add("abrir");
+    }, 250);
+
+    setTimeout(() => {
         window.location.href = "invitacion.html";
-    }, 1100);
+    }, 1500);
 }
 </script>
 
