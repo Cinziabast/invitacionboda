@@ -23,35 +23,37 @@ body {
     display: block;
 }
 
+/* BOTONES INVISIBLES */
 .boton {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 220px;      /* ajusta según el botón */
-    height: 50px;      /* ajusta según el botón */
-    background: rgba(255,0,0,0.3);
-    border-radius: 25px;
+    background: transparent;
+    color: transparent;
+    font-size: 0;
+    border: none;
     text-decoration: none;
     z-index: 10;
+    border-radius: 30px;
 }
 
-/* Ajusta estos porcentajes si el botón queda muy arriba o abajo */
-.boton1 { 
-    top: 49%; 
-    width: 260px; 
-    height: 55px; 
+/* AJUSTA ESTOS VALORES SI HACE FALTA */
+.boton1 {
+    top: 47.8%;
+    width: 240px;
+    height: 45px;
 }
 
-.boton2 { 
-    top: 61%; 
-    width: 260px; 
-    height: 55px; 
+.boton2 {
+    top: 60.2%;
+    width: 240px;
+    height: 45px;
 }
 
-.boton3 { 
-    top: 80%; 
-    width: 280px; 
-    height: 60px; 
+.boton3 {
+    top: 83.2%;
+    width: 260px;
+    height: 50px;
 }
 
 /* POPUP DORADO */
@@ -138,34 +140,23 @@ body {
 
     <img src="invitacion.png" alt="Invitación de boda">
 
-    <!-- BOTÓN CEREMONIA -->
     <a class="boton boton1"
        href="https://www.bing.com/maps/search?mepi=72%7ELocal%7EEmbedded%7ELocal_Magazine_List_Card_See_More&ty=17&poicount=18&usebfpr=true&v=2&sV=1&FORM=MPSRPL&style=r&q=iglesia+en+Valencia&secq=Parroquia+Nuestra+Se%C3%B1ora+del+Carmen+iglesia&sece=ypid%3AYN52109EE4BB565B2E&cp=39.483482%7E-0.370641&lvl=16"
-       target="_blank">
-       📍 Ver ubicación
-    </a>
+       target="_blank"></a>
 
-    <!-- BOTÓN RECEPCIÓN - cambia el href cuando tengas ubicación -->
     <a class="boton boton2"
        href="#"
-       target="_blank">
-       📍 Ver ubicación
-    </a>
+       target="_blank"></a>
 
-    <!-- BOTÓN CONFIRMAR -->
     <a class="boton boton3"
-       href="javascript:abrirPopup()">
-       💌 Confirmar asistencia
-    </a>
+       href="javascript:abrirPopup()"></a>
 
 </div>
 
-<!-- MÚSICA DE BODA -->
-<audio id="musica" loop autoplay>
+<audio id="musica" loop>
     <source src="boda.mp3" type="audio/mpeg">
 </audio>
 
-<!-- POPUP CONFIRMACIÓN -->
 <div class="popup-bg" id="popup">
     <div class="popup">
         <h2>Confirmar asistencia</h2>
@@ -178,6 +169,18 @@ body {
 </div>
 
 <script>
+const audio = document.getElementById("musica");
+
+window.addEventListener("load", () => {
+    audio.currentTime = 50;
+    audio.play().catch(() => {});
+});
+
+document.addEventListener("click", () => {
+    audio.currentTime = 50;
+    audio.play().catch(() => {});
+}, { once: true });
+
 function abrirPopup() {
     document.getElementById("popup").style.display = "flex";
 }
@@ -187,45 +190,13 @@ function cerrarPopup() {
 }
 
 function asistire() {
-    window.open("https://wa.me/4915227290402?text=Hola%20Javier%20y%20Laura,%20con%20much%C3%ADsima%20ilusi%C3%B3n%20confirmo%20mi%20asistencia%20a%20su%20boda%20%E2%9C%A8", "_blank");
+    window.open("https://wa.me/XXXXXXXXXX?text=Hola%20Javier%20y%20Laura,%20con%20much%C3%ADsima%20ilusi%C3%B3n%20confirmo%20mi%20asistencia%20a%20su%20boda%20%E2%9C%A8", "_blank");
 }
 
 function noAsistire() {
-    window.open("https://wa.me/4915227290402?text=Hola%20Javier%20y%20Laura,%20muchas%20gracias%20por%20la%20invitaci%C3%B3n.%20Lamentablemente%20no%20podr%C3%A9%20acompa%C3%B1arlos,%20pero%20les%20deseo%20una%20celebraci%C3%B3n%20hermosa%20y%20llena%20de%20amor%20%E2%9C%A8", "_blank");
+    window.open("https://wa.me/XXXXXXXXXX?text=Hola%20Javier%20y%20Laura,%20muchas%20gracias%20por%20la%20invitaci%C3%B3n.%20Lamentablemente%20no%20podr%C3%A9%20acompa%C3%B1arlos,%20pero%20les%20deseo%20una%20celebraci%C3%B3n%20hermosa%20y%20llena%20de%20amor%20%E2%9C%A8", "_blank");
 }
-
-/* Intenta activar música; si el navegador la bloquea, sonará al primer toque */
-document.addEventListener("DOMContentLoaded", () => {
-    const audio = document.getElementById("musica");
-
-    const playAudio = () => {
-        audio.play().catch(() => {});
-        document.removeEventListener("click", playAudio);
-        document.removeEventListener("scroll", playAudio);
-    };
-
-    audio.play().catch(() => {});
-    document.addEventListener("click", playAudio);
-    document.addEventListener("scroll", playAudio);
-});
 </script>
-
-    <script>
-const audio = document.getElementById("musica");
-
-// intenta iniciar al cargar
-window.addEventListener("load", () => {
-    audio.currentTime = 52;
-    audio.play().catch(() => {});
-});
-
-// FORZAR en el primer clic (clave en móviles)
-document.addEventListener("click", () => {
-    audio.currentTime = 52;
-    audio.play().catch(() => {});
-}, { once: true });
-</script>
-
 
 </body>
 </html>
