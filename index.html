@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nos Casamos</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background: #f8f4ee;
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
+
+.bg {
+    width: 100%;
+}
+
+.sobre {
+    width: 200px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.sobre:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+.texto {
+    position: absolute;
+    top: 15%;
+    width: 100%;
+    color: #8C6A2F;
+}
+
+.texto h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.texto h2 {
+    margin: 5px 0;
+    font-size: 32px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Fondo -->
+    <img src="fondo1.jpg" class="bg">
+
+    <!-- Texto -->
+    <div class="texto">
+        <h1>¡NOS CASAMOS!</h1>
+        <h2>Javier & Laura</h2>
+    </div>
+
+    <!-- Sobre -->
+    <img src="sobre.png" class="sobre" onclick="abrirInvitacion()">
+
+</div>
+
+<!-- Sonido varita -->
+<audio id="sonido">
+    <source src="magic.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function abrirInvitacion() {
+    const sonido = document.getElementById("sonido");
+    sonido.play();
+
+    setTimeout(() => {
+        window.location.href = "invitacion.html";
+    }, 1200);
+}
+</script>
+
+</body>
+</html>
