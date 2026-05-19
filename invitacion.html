@@ -3,94 +3,200 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Invitación</title>
+<title>Invitación de boda</title>
 
 <style>
 body {
     margin: 0;
-    background: black;
+    background: #f8f4ee;
 }
 
-/* contenedor */
 .container {
     position: relative;
+    width: 100%;
     max-width: 500px;
     margin: auto;
 }
 
-/* imagen fondo */
-img {
+.container img {
     width: 100%;
     display: block;
 }
 
-/* BOTONES SOBRE LA IMAGEN */
 .boton {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     background: #8C6A2F;
     color: white;
-    padding: 10px 20px;
+    padding: 10px 22px;
     border-radius: 25px;
     text-decoration: none;
+    font-family: Georgia, serif;
     font-size: 14px;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-/* posiciones (AJUSTA SI QUIERES) */
+/* Ajusta estos porcentajes si el botón queda muy arriba o abajo */
 .boton1 { top: 55%; }   /* ceremonia */
-.boton2 { top: 65%; }   /* recepción */
-.boton3 { top: 85%; }   /* confirmar */
-</style>
+.boton2 { top: 66%; }   /* recepción */
+.boton3 { top: 84%; }   /* confirmar */
 
+/* POPUP DORADO */
+.popup-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.popup {
+    background: linear-gradient(145deg, #fffaf3, #f3e3c3);
+    border: 2px solid #c9a45c;
+    border-radius: 22px;
+    padding: 25px 20px;
+    text-align: center;
+    width: 82%;
+    max-width: 320px;
+    box-shadow: 0 0 28px rgba(201,164,92,0.55);
+    font-family: Georgia, serif;
+    animation: aparecer 0.35s ease;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.popup h2 {
+    color: #8C6A2F;
+    margin: 0 0 10px;
+    font-size: 22px;
+}
+
+.popup p {
+    color: #4A3A32;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.popup button {
+    width: 100%;
+    padding: 11px;
+    margin: 7px 0;
+    border: none;
+    border-radius: 22px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: Georgia, serif;
+}
+
+.si {
+    background: #8C6A2F;
+    color: white;
+}
+
+.no {
+    background: #c9a45c;
+    color: white;
+}
+
+.cerrar {
+    background: transparent;
+    color: #8C6A2F;
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-    <!-- Imagen completa -->
-    <img src="invitacion.png">
+    <img src="invitacion.png" alt="Invitación de boda">
 
     <!-- BOTÓN CEREMONIA -->
-    <a href="https://www.bing.com/maps/search?mepi=72%7ELocal%7EEmbedded%7ELocal_Magazine_List_Card_See_More&ty=17&poicount=18&usebfpr=true&v=2&sV=1&FORM=MPSRPL&style=r&q=iglesia+en+Valencia&secq=Parroquia+Nuestra+Se%C3%B1ora+del+Carmen+iglesia&sece=ypid%3AYN52109EE4BB565B2E&cp=39.483482%7E-0.370641&lvl=16"
-       target="_blank" class="boton boton1">
-        📍 Ver ubicación
+    <a class="boton boton1"
+       href="https://www.bing.com/maps/search?mepi=72%7ELocal%7EEmbedded%7ELocal_Magazine_List_Card_See_More&ty=17&poicount=18&usebfpr=true&v=2&sV=1&FORM=MPSRPL&style=r&q=iglesia+en+Valencia&secq=Parroquia+Nuestra+Se%C3%B1ora+del+Carmen+iglesia&sece=ypid%3AYN52109EE4BB565B2E&cp=39.483482%7E-0.370641&lvl=16"
+       target="_blank">
+       📍 Ver ubicación
     </a>
 
-    <!-- BOTÓN RECEPCIÓN -->
-    <a href="#" class="boton boton2">
-        📍 Ver ubicación
+    <!-- BOTÓN RECEPCIÓN - cambia el href cuando tengas ubicación -->
+    <a class="boton boton2"
+       href="#"
+       target="_blank">
+       📍 Ver ubicación
     </a>
 
     <!-- BOTÓN CONFIRMAR -->
-    <a href="javascript:confirmar()" class="boton boton3">
-        💌 Confirmar asistencia
+    <a class="boton boton3"
+       href="javascript:abrirPopup()">
+       💌 Confirmar asistencia
     </a>
 
 </div>
 
-<!-- MÚSICA -->
-<audio id="musica" autoplay loop>
+<!-- MÚSICA DE BODA -->
+<audio id="musica" loop autoplay>
     <source src="boda.mp3" type="audio/mpeg">
 </audio>
 
+<!-- POPUP CONFIRMACIÓN -->
+<div class="popup-bg" id="popup">
+    <div class="popup">
+        <h2>Confirmar asistencia</h2>
+        <p>¿Podrás acompañarnos en este día tan especial?</p>
+
+        <button class="si" onclick="asistire()">Sí asistiré ✨</button>
+        <button class="no" onclick="noAsistire()">No podré asistir 💌</button>
+        <button class="cerrar" onclick="cerrarPopup()">Cerrar</button>
+    </div>
+</div>
+
 <script>
-window.addEventListener('load', function() {
-    const musica = document.getElementById("musica");
-    musica.play().catch(() => {});
-});
-
-/* POPUP CONFIRMACIÓN */
-function confirmar() {
-    const respuesta = confirm("¿Podrás acompañarnos en este día tan especial?");
-
-    if (respuesta) {
-        window.open("https://wa.me/XXXXXXXXXX?text=Hola%20Javier%20y%20Laura,%20asistiré%20a%20su%20boda%20💖", "_blank");
-    } else {
-        window.open("https://wa.me/XXXXXXXXXX?text=Hola%20Javier%20y%20Laura,%20lamentablemente%20no%20podré%20asistir%20😔", "_blank");
-    }
+function abrirPopup() {
+    document.getElementById("popup").style.display = "flex";
 }
+
+function cerrarPopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+function asistire() {
+    window.open("https://wa.me/4915227290402?text=Hola%20Javier%20y%20Laura,%20con%20much%C3%ADsima%20ilusi%C3%B3n%20confirmo%20mi%20asistencia%20a%20su%20boda%20%E2%9C%A8", "_blank");
+}
+
+function noAsistire() {
+    window.open("https://wa.me/4915227290402?text=Hola%20Javier%20y%20Laura,%20muchas%20gracias%20por%20la%20invitaci%C3%B3n.%20Lamentablemente%20no%20podr%C3%A9%20acompa%C3%B1arlos,%20pero%20les%20deseo%20una%20celebraci%C3%B3n%20hermosa%20y%20llena%20de%20amor%20%E2%9C%A8", "_blank");
+}
+
+/* Intenta activar música; si el navegador la bloquea, sonará al primer toque */
+document.addEventListener("DOMContentLoaded", () => {
+    const audio = document.getElementById("musica");
+
+    const playAudio = () => {
+        audio.play().catch(() => {});
+        document.removeEventListener("click", playAudio);
+        document.removeEventListener("scroll", playAudio);
+    };
+
+    audio.play().catch(() => {});
+    document.addEventListener("click", playAudio);
+    document.addEventListener("scroll", playAudio);
+});
 </script>
 
 </body>
